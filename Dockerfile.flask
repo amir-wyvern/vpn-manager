@@ -1,0 +1,15 @@
+FROM tiangolo/uwsgi-nginx-flask:latest
+
+COPY ./pays/zarinpal/custom.conf /etc/nginx/conf.d/
+
+COPY ./config.py /app/config.py
+COPY ./models.py /app/models.py
+COPY ./bot.ini /app/bot.ini
+COPY ./v2rayVpn.py /app/v2rayVpn.py
+COPY ./xuicookies.json /app/xuicookies.json
+
+COPY ./pays/zarinpal/requirements.txt /app/requirements.txt
+
+RUN pip3 install -r /app/requirements.txt
+
+COPY ./pays/zarinpal/app /app

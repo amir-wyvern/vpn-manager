@@ -1,0 +1,57 @@
+services:
+  
+  bot:
+    build: .
+    stdin_open: true
+    tty: true
+    volumes:  
+      - ./:/vpnbot
+
+    network_mode: host
+
+    logging:
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+    environment:
+      - TZ=Asia/Tehran
+
+  flask:
+    build: 
+      context: .
+      dockerfile: Dockerfile.flask
+    volumes:
+      - ./pays/zarinpal/app:/app
+      - ./config.py:/app/config.py
+      - ./models.py:/app/models.py
+      - ./bot.ini:/app/bot.ini
+      - ./datetimeIR.py:/app/datetimeIR.py
+      - ./v2rayVpn.py:/app/v2rayVpn.py
+      - ./xuicookies.json:/app/xuicookies.json
+    # ports:
+    #   - "80:80"
+
+    network_mode: host
+
+    logging:
+      options:
+        max-size: "100m"
+        max-file: "3"
+  
+  db:
+    build: ./db
+    ports: 
+      - "5433:5433"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+    logging:
+      options:
+        max-size: "100m"
+        max-file: "3"
+  
+    environment:
+      - TZ=Asia/Tehran
+
+    command: -p 5433

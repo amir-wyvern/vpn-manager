@@ -1,0 +1,9 @@
+python-telegram-bot==13.14
+peewee
+psycopg2
+coloredlogs
+jdatetime
+suds-py3
+requests
+qrcode
+Pillow
