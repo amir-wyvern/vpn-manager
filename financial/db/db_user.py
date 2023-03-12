@@ -18,6 +18,10 @@ def create_user(request: UserRegisterForDataBase, db: Session):
     db.refresh(user)
     return user
 
+def create_user_if_not_exist(request: UserRegisterForDataBase, db: Session):
+
+    if get_user(request.user_id, db) == None:
+        return create_user(request, db)
 
 def get_all_users(db:Session):
     return db.query(DbUser).all()
