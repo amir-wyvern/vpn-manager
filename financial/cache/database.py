@@ -7,7 +7,6 @@ dotenv_path = Path('.env')
 load_dotenv(dotenv_path=dotenv_path)
 
 CACHE_URL = os.getenv('CACHE_URL')
-AUTH_TOKEN_EXPIRE = int(os.getenv('OAUTH2_ACCESS_AUTH_TOKEN_EXPIRE_MINUTES')) * 60
 
 class RedisSingleton:
     _instance = None
